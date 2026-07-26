@@ -84,6 +84,9 @@ function questionsPage(isshowanswer = false) {
 
   }
   const nextquestion = () => {
+    if (isshowanswer == false) { showanswer(); return; }
+    isshowanswer = false;
+    btnNext.textContent = "نمایش جواب"
     showquestion();
     if (isshowanswer) {
       showanswer();
@@ -105,6 +108,7 @@ function questionsPage(isshowanswer = false) {
       j--;
     }
     if (!isshowanswer) {
+      answers[currentquestion]=null;
       inputansewer.forEach((value, key) => {
         value.disabled = false;
         value.checked = false;
@@ -137,25 +141,30 @@ function questionsPage(isshowanswer = false) {
     if (useranswer != null)
       inputansewer.item(useranswer).checked = true;
 
-    inputansewer.forEach((value, key) => {
-      if (value.checked && useranswer == null) {
+    inputansewer.forEach((option, key) => {
+      if (option.checked && useranswer == null) {
         localStorage.setItem("Useranswer", key);
         if (key == indexcorrectanswer) {
+          answers[currentquestion]=true;
           resultCurrectAnswer++
         }
       }
       if (key == indexcorrectanswer)
         labeloption.item(key).className = "show-answer";
-      else if (value.checked)
+      else if (option.checked){
         labeloption.item(key).className = "show-incorrect";
+        answers[currentquestion]=labeloption.item(key).textContent;
+      }
 
-      value.disabled = true;
+      option.disabled = true;
     })
     btnNext.disabled = false;
     btnNext.textContent = "سوال بعد"
     isshowanswer = true;
     savestatus();
     showscore();
+    console.log("answers:",answers);
+    
     currentquestion++;
     if ((currentquestion == questions.length)) {
       btnNext.removeEventListener("click", nextquestion);
@@ -177,13 +186,7 @@ function questionsPage(isshowanswer = false) {
     btnNext.disabled = false
   ));
 
-  btnNext.addEventListener("click", () => {
-    if (isshowanswer == false) { showanswer(); return; }
-    isshowanswer = false;
-    btnNext.textContent = "نمایش جواب"
-    nextquestion();
-  })
-
+  btnNext.addEventListener("click",nextquestion) 
   showquestion();
 }
 
@@ -224,8 +227,8 @@ function displayelement(element, cssclass = "") {
 let currentquestion = 0;
 let indexcorrectanswer = -1;
 let resultCurrectAnswer = 0;
-
 let timer;
+const answers=[];
 const questions = [];
 const btnStart = document.querySelector("button");
 const btnNext = document.getElementById("btnnext");
