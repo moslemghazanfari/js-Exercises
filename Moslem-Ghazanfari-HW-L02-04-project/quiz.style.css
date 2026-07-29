@@ -5,6 +5,7 @@
 }
 
 .body {
+  font-family: Vazirmatn, monospace;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -12,10 +13,8 @@
   width: 100%;
   height: 100vh;
 }
-.farsi{
-  direction: rtl;
-}
- input[type="radio"]{
+
+/* input[type="radio"]{
   appearance: none;
   background-color:white;
   width:1.15em ;
@@ -26,8 +25,81 @@
  input[type="radio"]:checked{
   background-color: steelblue;
   outline: 0.1em solid blueviolet;
+} */
+
+
+[type="radio"] {
+  appearance: none;
 }
-.display-none{
+
+.inputradio:checked+.inputlabel::before {
+  content: "\2705";
+}
+
+.inputlabel::before {
+  content: "\2B1C";
+  padding-right: 5px;
+}
+
+.inputlabel {
+  cursor: pointer;
+  font-size: larger;
+}
+
+.show-answer::before {
+  content: "\2705";
+  padding-right: 5px;
+  background-color: burlywood;
+}
+
+.show-answer {
+  font-size: larger;
+  background-color: green;
+  color: yellow;
+}
+
+.show-incorrect::before {
+  content: "\274C";
+  padding-right: 5px;
+  background-color: burlywood;
+}
+
+.show-incorrect {
+  font-size: larger;
+  background-color: red;
+}
+
+@property --progress {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 10%;
+}
+
+.progress {
+  display: inline-block;
+  position: absolute;
+  --progress: 10%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10%;
+  background: radial-gradient(circle at center, white, green var(--progress), black var(--progress));
+  animation: progressanimation 2s ease infinite;
+}
+
+@keyframes progressanimation {
+  to {
+    --progress: 100%;
+  }
+}
+
+.farsi {
+  direction: rtl;
+}
+
+.display-none {
   display: none;
 }
 
@@ -43,23 +115,35 @@
   background-color: aliceblue;
   border-radius: 10px;
   border: 3px solid rgb(243, 230, 230);
-  box-shadow: 1px 1px 5px 5px  rgba(220, 220, 220,.8);
+  box-shadow: 1px 1px 5px 5px rgba(220, 220, 220, .8);
   padding: 20px;
-  
+
 }
 
-.timer{
+.timer {
   text-align: center;
-  font-weight:600;
+  font-weight: 600;
   background-color: beige;
-  color:blue;
+  color: blue;
 }
+
 .title {
   grid-column: 2 span;
 }
 
 .p1 {
   grid-column: 2 span;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.btnstart:disabled,
+.btnstart:disabled:hover {
+  background-color: rgb(160, 160, 195);
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
 }
 
 .btnstart {
@@ -71,14 +155,14 @@
   border: none;
 }
 
-.btnstart:hover {
+.btnstart:enabled:hover {
 
   background-color: rgb(80, 80, 248);
   scale: 1.01;
   cursor: pointer;
 }
 
-.btnnext{
+.btnnext {
   background-color: rgb(248, 164, 19);
   color: whitesmoke;
   padding: 10px;
@@ -86,7 +170,8 @@
   border: none;
   cursor: pointer;
 }
-.btnresult{
+
+.btnresult {
   background-color: rgb(11, 204, 46);
   color: whitesmoke;
   padding: 10px;
@@ -95,6 +180,7 @@
   cursor: pointer;
 
 }
+
 .section2 {
   display: flex;
   flex-direction: column;
@@ -102,34 +188,65 @@
   row-gap: 2rem;
 }
 
-.section3{
+.section3 {
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
   min-width: 550px;
 }
-.option{
+
+.option {
   padding: 10px;
   background-color: burlywood;
   line-height: 2rem;
 }
-.option > input[type="radio"],label{
-   cursor: pointer;
-}
 
-.btn-answer{
+.btn-answer {
   direction: rtl;
 }
-
-.show-answer{
-  background-color: green;
-  color:yellow;
+.question{
+  font-size: x-large;
+}
+#titleresult{
+  font-size: x-large;
+  color: blueviolet;
+  text-align: center;
 }
 
-.show-incorrect{
-  background-color: red;
-
+#result{
+  font-size: x-large;
+  color:fuchsia
 }
 
-#list-question>li:nth-child(odd){
-background-color: gainsboro;
+#list-question {
+  background-color: gainsboro;
+  font-size: larger;
+
+}
+.question2{
+  font-size: large;
+  
+}
+.Answer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content:space-around;
+  background-color: beige;
+  font-size: large;
+  color:blue;
+  padding: 5px 5px;
+}
+
+.correctAnswer {
+  color: green;
+}
+
+.voidAnswer {
+
+  color: orange;
+}
+
+.incorrectAnswer {
+
+  color: red;
 }

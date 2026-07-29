@@ -4,12 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
   <title>چالش دانش</title>
   <link rel="stylesheet" href="quiz.style.css">
+  <script src="quiz.js"></script>
 </head>
 
 <body class="body">
-  
+
+  <div id="progressbox" class="display-none"></div>
+
+
   <section id="section1" class="section1 borderbox"><!-- section1 borderbox -->
     <h1 class="title">محک سطح دانش</h1>
     <p class="p1">باانتخاب تعدادوسطح سختی سوال و همچنین دسته دانش مورد نظرتون خود را به چالش بکشید </p>
@@ -36,33 +43,35 @@
     <div id="timer" class="timer"></div>
     <p class="question"></p>
     <div class="option">
-      <input type="radio" id="option1" name="option" value="0">
-      <label for="option1"></label><br>
-      <input type="radio" id="option2" name="option" value="1">
-      <label for="option2"></label><br>
-      <input type="radio" id="option3" name="option" value="2">
-      <label for="option3"> </label><br>
-      <input type="radio" id="option4" name="option" value="3">
-      <label for="option4"> </label><br>   
+      <input type="radio" id="option1" class="inputradio" name="option" value="0">
+      <label for="option1" class="inputlabel"></label><br>
+      <input type="radio" id="option2" class="inputradio" name="option" value="1">
+      <label for="option2" class="inputlabel"></label><br>
+      <input type="radio" id="option3" class="inputradio" name="option" value="2">
+      <label for="option3" class="inputlabel"> </label><br>
+      <input type="radio" id="option4" class="inputradio" name="option" value="3">
+      <label for="option4" class="inputlabel"> </label><br>
     </div>
     <div class="farsi">
       <span id="currANDtotal"></span>
       <span id="curresult"></span>
     </div>
-    <button id="btnnext" class="btnnext" disabled>نمایش جواب</button>
+    <button id="btnnext" class="btnnext">نمایش جواب</button>
   </section>
   <section id="section3" class="display-none">
     <div class="farsi">
-      <h2>نتیجه تست</h2>
+      <h2 id="titleresult">نتیجه تست</h2>
       <p id="result"></p>
     </div>
     <div class="list-question">
-      <p class="farsi">لیست سوالات به همراه جواب</p>
-      <ol id="list-question"></ol>
+      <p class="farsi p1">لیست سوالات به همراه جواب</p>
+      <ol id="list-question">
+
+      </ol>
     </div>
     <button id="reload" class="btnstart">شروع چالش دیگر</button>
   </section>
-  <script src="quiz.js"></script>
+  <script src="startapp.js"></script>
 </body>
 
 </html>
